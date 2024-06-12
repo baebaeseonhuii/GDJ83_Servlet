@@ -13,6 +13,7 @@ public class WeatherController {
 
 	public WeatherController() {
 		this.weatherService = new WeatherService();
+
 		// 어차피 생성자는 한번 호출되니까 생성자에서 객체 만듦
 	}
 
@@ -20,7 +21,7 @@ public class WeatherController {
 		this.weatherService = weatherService;
 	}
 
-	public Action start(HttpServletRequest request) {
+	public Action start(HttpServletRequest request) throws Exception {
 		// /weather/list
 		String uri = request.getRequestURI();
 		StringTokenizer st = new StringTokenizer(uri, "/");

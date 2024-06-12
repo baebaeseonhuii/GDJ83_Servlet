@@ -31,8 +31,7 @@ public class FrontController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		System.out.println("실행됨");
@@ -73,7 +72,12 @@ public class FrontController extends HttpServlet {
 				// weather/list.jsp가고싶다
 
 				WeatherController wc = new WeatherController();
-				action = wc.start(request);
+				try {
+					action = wc.start(request);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			}
 
