@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+.tbl {
+	border: 2px solid black;
+	border-spacing: 0;
+	border-collapse: collapse;
+	/*선이 겹칠 때 하나만 보이게, 깔끔하게*/
+	width: 60%;
+	/*부모(body)의 60%*/
+	margin: 10px auto;
+}
+
+.tbl td, .tbl th {
+	border: dashed red 1px;
+	text-align: center;
+	height: 40px;
+}
+
+.h1 {
+	text-align: center;
+}
