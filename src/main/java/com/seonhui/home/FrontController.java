@@ -36,7 +36,7 @@ public class FrontController extends HttpServlet {
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		
+
 		System.out.println("실행됨");
 
 		String uri = request.getRequestURI();
@@ -93,7 +93,7 @@ public class FrontController extends HttpServlet {
 				RequestDispatcher view = request.getRequestDispatcher(action.getPath());
 				view.forward(request, response);// 실행은 여기서 됨 jsp를 찾으러 간다는 뜻
 			} else {
-				response.sendRedirect(action.getPath());
+				response.sendRedirect(action.getPath()); // jsp가지 말고 바로 주소를 리턴
 			}
 
 		}

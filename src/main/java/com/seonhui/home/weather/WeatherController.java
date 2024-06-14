@@ -49,7 +49,15 @@ public class WeatherController {
 				weatherDTO.setStatus(status);
 				weatherDTO.setHumidity(humidity);
 				weatherService.addWeather(weatherDTO);
-				action.setPath("/WEB-INF/views/weather/add.jsp");
+				// 밑의 두 줄이 없으면 리스트로 가도 아무것도 안보임->jsp에 보내준게 없어서
+				List<WeatherDTO> weatherList = weatherService.getWeathers();
+				request.setAttribute("weatherList", weatherList);
+				// FrontController에서 response.sendRedirect(action.getPath())여기로 들어가야하니까
+				// else가 돼야하니까 flag를 false로
+				action.setFlag(false);
+				// redirect로 jsp안 거치고 현재 폴더의 list로 감
+				action.setPath("./list");
+
 			} else {
 				action.setPath("/WEB-INF/views/weather/add.jsp");
 			}
