@@ -131,4 +131,12 @@ public class WeatherDAO {
 //		fw.close();
 	}
 
+	public void updateWeather(WeatherDTO weatherDTO) throws Exception {
+		WeatherDTO dto = this.getDetail(weatherDTO);
+		dto.setCity(weatherDTO.getCity());
+		dto.setGion(weatherDTO.getGion());
+		dto.setStatus(weatherDTO.getStatus());
+		dto.setHumidity(weatherDTO.getHumidity());
+	}
+
 }
