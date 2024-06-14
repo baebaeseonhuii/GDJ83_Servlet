@@ -34,6 +34,9 @@ public class FrontController extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		// response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
 		System.out.println("실행됨");
 
 		String uri = request.getRequestURI();
@@ -66,7 +69,12 @@ public class FrontController extends HttpServlet {
 				// student/list.jsp가고싶다
 
 				StudentController sc = new StudentController();
-				action = sc.start(request);
+				try {
+					action = sc.start(request);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 
 			} else if (p[1].equals("weather")) {
 				// weather/list.jsp가고싶다

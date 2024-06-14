@@ -17,13 +17,13 @@
 				<th>City</th>
 				<th>Temperature</th>
 				<th>Status</th>
-				<th>humidity</th>
+				<th>Humidity</th>
 			</tr>
 		</thead>
-		<c:forEach items="${requestScope.weatherList}" var="w">
+		<c:forEach items="${requestScope.weatherList}" var="w"> <!-- requestScope.weatherList에서 하나 꺼내오는게 w -->
 			<tr>
-				<td>${pageScope.w.num}</td>
-				<td><a href="./detail">${pageScope.w.city}</a></td>
+				<td>${pageScope.w.num}</td> <!-- w는 for each 안에서만 쓰이는 지역변수라서 pageScope를 씀 -->
+				<td><a href="./detail?num=${pageScope.w.num}">${pageScope.w.city}</a></td>
 				<td>${pageScope.w.gion}</td>
 				<td>${pageScope.w.status}</td>
 				<td>${pageScope.w.humidity}</td>
@@ -35,6 +35,9 @@
 
 
 	</table>
+	<div>
+		<a href="./add">날씨 등록</a>
+	</div>
 
 
 

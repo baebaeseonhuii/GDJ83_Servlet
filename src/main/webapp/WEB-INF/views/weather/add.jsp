@@ -8,5 +8,32 @@
 </head>
 <body>
 <h1>날씨 정보 한개 추가</h1>
+
+<form action="./add" method="post">
+	<div>
+		<label>City</label>
+		<input type="text" name="city"> <!-- 안에 들어가는게 파라미터 -->
+	</div>
+	
+	<div>
+		<label>Temperature</label>
+		<input type="text" name="gion">
+	</div>
+	
+	<div>
+		<label>Status</label>
+		<input type="text" name="status">
+	</div>
+	
+	<div>
+		<label>Humidity</label>
+		<input type="text" name="humidity">
+	</div>
+	
+	<input type="submit" value="Submit">
+	<button type="submit">Submit</button>
+
+
+</form>
 </body>
 </html>

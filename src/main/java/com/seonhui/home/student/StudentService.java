@@ -1,13 +1,16 @@
 package com.seonhui.home.student;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 public class StudentService {
+	private StudentDAO studentDAO;
 
-	public Student makeStudent() {
-		Student student = new Student();
+	public StudentService() {
+		studentDAO = new StudentDAO();
+	}
+
+	public StudentDTO makeStudent() {
+		StudentDTO student = new StudentDTO();
 		student.setNum(1);
 		student.setName("seonhui");
 		student.setAvg(56.32);
@@ -15,19 +18,19 @@ public class StudentService {
 		return student;
 	}
 
-	public List<Student> getStudents() {
-		ArrayList<Student> ar = new ArrayList<Student>();
-		Random random = new Random();
-
-		for (int i = 0; i < 5; i++) {
-			Student student = new Student();
-			student.setNum(i + 1);
-			student.setName("name" + (i + 1));
-			student.setAvg(random.nextInt(100) + random.nextDouble());
-			ar.add(student);
-
-		}
+	public List<StudentDTO> getStudents() throws Exception {
+		List<StudentDTO> ar = studentDAO.getStudents();
 		return ar;
+	}
 
+	public StudentDTO getDetail(StudentDTO studentDTO) {
+		try {
+			studentDTO = studentDAO.getDetail(studentDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			studentDTO = null;
+		}
+		return studentDTO;
 	}
 }

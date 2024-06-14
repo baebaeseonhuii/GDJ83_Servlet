@@ -16,4 +16,27 @@ public class WeatherService {
 		List<WeatherDTO> ar = weatherDAO.getWeathers();
 		return ar;
 	}
+
+	// detail가져오기
+	public WeatherDTO getDetail(WeatherDTO weatherDTO) {
+
+		try {
+			weatherDTO = weatherDAO.getDetail(weatherDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			weatherDTO = null;// 이미 만들어진 매개변수 weatherDTO는 null이 아니라서
+		}
+		return weatherDTO;
+	}
+
+	public void addWeather(WeatherDTO weatherDTO) {
+		try {
+			weatherDAO.addWeather(weatherDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 }

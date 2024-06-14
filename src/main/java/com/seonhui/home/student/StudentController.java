@@ -19,7 +19,7 @@ public class StudentController {
 		this.studentService = studentService;
 	}
 
-	public Action start(HttpServletRequest request) {
+	public Action start(HttpServletRequest request) throws Exception {
 		// /student/??? -> uri를 request에서 꺼내와서 if
 		String uri = request.getRequestURI();
 
@@ -35,13 +35,13 @@ public class StudentController {
 		String method = request.getMethod();
 
 		if (afterStudent.equals("list")) {
-			List<Student> list = studentService.getStudents();
-			request.setAttribute("list", list);
+			List<StudentDTO> studentList = studentService.getStudents();
+			request.setAttribute("studentList", studentList);
 			action.setPath("/WEB-INF/views/student/list.jsp");
 		} else if (afterStudent.equals("add")) {
 			if (method.toUpperCase().equals("POST")) {
 				System.out.println("학생 등록 데이터를 꺼내야 함");
-				Student student = new Student();
+				StudentDTO student = new StudentDTO();
 				String name = request.getParameter("name");
 				String num = request.getParameter("num");
 				String avg = request.getParameter("avg");
@@ -67,13 +67,20 @@ public class StudentController {
 		} else if (afterStudent.equals("delete")) {
 			// action.setPath("/WEB-INF/views/student/delete.jsp");
 		} else if (afterStudent.equals("detail")) {
-			Student student = this.studentService.makeStudent();
-			request.setAttribute("student", student);
-//			
+			String num = request.getParameter("num");
+			StudentDTO studentDTO = new StudentDTO();
+			studentDTO.setNum(Integer.parseInt(num));
+			studentDTO = studentService.getDetail(studentDTO);
+			if (studentDTO != null) {
+				request.setAttribute("studentDetail", studentDTO);
+				action.setPath("/WEB-INF/views/student/detail.jsp");
+			} else {
+				request.setAttribute("message", "No data");
+				action.setPath("/WEB-INF/views/commons/message.jsp");
+			}
 //			request.setAttribute("name", name);
 //			request.setAttribute("avg", avg); // 이 지역변수들이 request에 저장돼서 jsp까지 살아있음
 
-			action.setPath("/WEB-INF/views/student/detail.jsp");
 		} else {
 
 		}

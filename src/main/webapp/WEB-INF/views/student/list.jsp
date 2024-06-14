@@ -9,10 +9,8 @@
 <link href="/resources/css/tables.css" rel="stylesheet">
 </head>
 <body>
-	<h1>Student List</h1>
-	<div>
-	<img alt="" src="/resources/images/logo.png">
-	</div>
+	<h1 class="h1">Student List</h1>
+	
 
 
 	<!-- JSTL -->
@@ -23,10 +21,10 @@
 			<th>이름</th>
 			<th>평균</th>
 		</tr>
-		<c:forEach items="${requestScope.list}" var="student">
+		<c:forEach items="${requestScope.studentList}" var="student">
 			<tr>
 				<th>${pageScope.student.num}</th>
-				<td>${pageScope.student.name}</td>
+				<td><a href="./detail?num=${pageScope.student.num}">${pageScope.student.name}</a></td>
 				<td>${pageScope.student.avg}</td>
 			</tr>
 
