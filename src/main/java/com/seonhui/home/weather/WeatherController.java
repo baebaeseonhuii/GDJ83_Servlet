@@ -78,7 +78,27 @@ public class WeatherController {
 			}
 
 		} else if (afterWeather.equals("delete")) {
-			action.setPath("/WEB-INF/views/weather/delete.jsp");
+			String num = request.getParameter("num");
+			WeatherDTO weatherDTO = new WeatherDTO();
+			weatherDTO.setNum(Long.parseLong(num));
+			weatherService.deleteWeather(weatherDTO);
+
+			System.out.println("delete happened");
+			List<WeatherDTO> weatherList = weatherService.getWeathers();
+			request.setAttribute("weatherList", weatherList);
+			action.setFlag(false);
+			action.setPath("./list");
+		} else if (afterWeather.equals("update")) {
+			if (method.toUpperCase().equals("POST")) {
+
+			} else {
+				WeatherDTO weatherDTO = new WeatherDTO();
+				weatherDTO.setNum(Long.parseLong(request.getParameter("num")));
+				weatherDTO = weatherService.getDetail(weatherDTO);
+				request.setAttribute("weatherDTO", weatherDTO);
+				action.setPath("/WEB-INF/views/weather/update.jsp");
+
+			}
 		} else {
 
 		}

@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -61,6 +62,8 @@ public class WeatherDAO {
 
 	public void addWeather(WeatherDTO weatherDTO) throws Exception {
 		List<WeatherDTO> ar = this.getWeathers();
+		Calendar ca = Calendar.getInstance();
+
 //		// 도시명-기온-상태-습도
 //		StringBuffer sb = new StringBuffer();
 //		sb.append(ar.size() + 1);
@@ -78,7 +81,7 @@ public class WeatherDAO {
 
 		try {
 			fw = new FileWriter(file, true);
-			String s = (ar.size() + 1) + "-" + weatherDTO.getCity() + "-" + weatherDTO.getGion() + "-"
+			String s = ca.getTimeInMillis() + "-" + weatherDTO.getCity() + "-" + weatherDTO.getGion() + "-"
 					+ weatherDTO.getStatus() + "-" + weatherDTO.getHumidity();
 			fw.write(s + "\n");
 			System.out.println(s);
@@ -89,6 +92,43 @@ public class WeatherDAO {
 		} finally {
 			fw.close();
 		}
+	}
+
+	public void deleteWeather(WeatherDTO weatherDTO) throws Exception {
+		// 리스트로 받아와서 입력된 정보랑 일치하는 애를 찾아서 그걸 지우기?
+		// 파일 전체를 다시 쓰기, 새로운 데이터로 덮어씌우기
+		// 기존 weatherDTOs 리스트에서 해당 도시명이면 건너뛰기
+		List<WeatherDTO> ar = this.getWeathers();
+
+		File file = new File("C:\\study\\weather.txt");
+		FileWriter fw = new FileWriter(file, false);// 덮어씌워야해서 false
+
+		int flag = 0;
+		for (WeatherDTO dto : ar) {
+			if (dto.getNum() == weatherDTO.getNum()) {
+				flag++;
+				continue;
+			}
+			String s = dto.getNum() - flag + "-" + dto.getCity() + "-" + dto.getGion() + "-" + dto.getStatus() + "-"
+					+ dto.getHumidity();
+			fw.write(s + "\n");
+		}
+
+		fw.close();
+
+//		for (int i = 0; i < ar.size(); i++) {
+//			if (ar.get(i).getNum() == weatherDTO.getNum()) {
+//
+//				continue;
+//			}
+//			// 파일에 덮어씌워 추가
+//			String s = (ar.get(i).getNum() - 1) + "-" + ar.get(i).getCity() + "-" + ar.get(i).getGion() + "-"
+//					+ ar.get(i).getStatus() + "-" + ar.get(i).getHumidity();
+//			fw.write(s + "\n");
+//			System.out.println(s);
+//
+//		}
+//		fw.close();
 	}
 
 }

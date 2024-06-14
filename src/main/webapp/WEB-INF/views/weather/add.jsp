@@ -30,7 +30,9 @@
 		<input type="text" name="humidity">
 	</div>
 	
-	<input type="submit" value="Submit">
+	
+	
+	<input type="submit" value="Submit"> <!-- form을 action의 주소로 전송하는 이벤트: submit -->
 	<button type="submit">Submit</button>
 
 
