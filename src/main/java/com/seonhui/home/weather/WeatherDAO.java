@@ -132,11 +132,13 @@ public class WeatherDAO {
 	}
 
 	public void updateWeather(WeatherDTO weatherDTO) throws Exception {
-		List<WeatherDTO> ar = this.getWeathers();
+		List<WeatherDTO> ar = this.getWeathers(); // 먼저 실행 -> getWeathers 메소드로 감↑
+		// getWeathers 메소드에서 fw, fr IO스트림 열었다가 닫힘
 		File file = new File("C:\\study\\weather.txt");
 		FileWriter fw = new FileWriter(file, false);
 		FileReader fr = new FileReader(file); // 읽는 객체
 		BufferedReader br = new BufferedReader(fr); // 연결해주는 애
+		// 참고로.. fw,fr IO스트림은 여러 곳에서 열려있으면 오류
 
 		// add(index, Object) -> 해당 인덱스 번호를 오브젝트로 바꿔라
 		for (int i = 0; i < ar.size(); i++) {
