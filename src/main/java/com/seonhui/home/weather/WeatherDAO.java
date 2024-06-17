@@ -132,11 +132,31 @@ public class WeatherDAO {
 	}
 
 	public void updateWeather(WeatherDTO weatherDTO) throws Exception {
-		WeatherDTO dto = this.getDetail(weatherDTO);
-		dto.setCity(weatherDTO.getCity());
-		dto.setGion(weatherDTO.getGion());
-		dto.setStatus(weatherDTO.getStatus());
-		dto.setHumidity(weatherDTO.getHumidity());
+		List<WeatherDTO> ar = this.getWeathers();
+		File file = new File("C:\\study\\weather.txt");
+		FileWriter fw = new FileWriter(file, false);
+		FileReader fr = new FileReader(file); // 읽는 객체
+		BufferedReader br = new BufferedReader(fr); // 연결해주는 애
+
+		// add(index, Object) -> 해당 인덱스 번호를 오브젝트로 바꿔라
+		for (int i = 0; i < ar.size(); i++) {
+			if (weatherDTO.getNum() == ar.get(i).getNum()) {
+				// 일치하면 데이터를 하나하나 다 바꾸기
+				ar.get(i).setCity(weatherDTO.getCity());
+				// i번째에서 아예 교체
+				ar.set(i, weatherDTO);
+				break;
+			}
+
+		}
+		for (WeatherDTO dto : ar) {
+			String s = dto.getNum() + "-" + dto.getCity() + "-" + dto.getGion() + "-" + dto.getStatus() + "-"
+					+ dto.getHumidity();
+			fw.write(s + "\n");
+		}
+
+		fw.close();
+
 	}
 
 }

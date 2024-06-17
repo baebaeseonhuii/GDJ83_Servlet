@@ -48,4 +48,13 @@ public class WeatherService {
 			e.printStackTrace();
 		}
 	}
+
+	public void update(WeatherDTO weatherDTO) {
+		try {
+			weatherDAO.updateWeather(weatherDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

@@ -8,7 +8,7 @@
 </head>
 <body>
 <h1>날씨 정보 수정</h1>
-<form action="./detail" method="post">
+<form action="./update" method="post">
 <input id="num" type="hidden" name="num" value="${requestScope.weatherDTO.num}" readonly>
 <div>
 		<label>City</label>

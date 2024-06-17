@@ -90,6 +90,20 @@ public class WeatherController {
 			action.setPath("./list");
 		} else if (afterWeather.equals("update")) {
 			if (method.toUpperCase().equals("POST")) {
+				WeatherDTO weatherDTO = new WeatherDTO();
+				weatherDTO.setNum(Long.parseLong(request.getParameter("num")));
+				String city = request.getParameter("city");
+				double gion = Double.parseDouble(request.getParameter("gion"));
+				String status = request.getParameter("status");
+				int humidity = Integer.parseInt(request.getParameter("humidity"));
+				weatherDTO.setCity(city);
+				weatherDTO.setGion(gion);
+				weatherDTO.setStatus(status);
+				weatherDTO.setHumidity(humidity);
+
+				weatherService.update(weatherDTO);
+				action.setFlag(false);
+				action.setPath("./list");
 
 			} else {
 				WeatherDTO weatherDTO = new WeatherDTO();
